@@ -34,8 +34,7 @@ for chr in range(1, 23) :
                                                     'match_GSE_gene', 'match_GSE_Tx', 'GSE_AVG_Tx', 'GSE_AVG_gene', 'GSE_Tx%',
                                                     'GSE_Rank', 'GSE_Ref_Tx']]
 
-            df_v8_chr_GeneID_Tx.rename(columns={'V8_Tx%': 'V8_Tx_pct', 'V9_Tx%': 'V9_Tx_pct', 'ONT_Tx%': 'ONT_Tx_pct', 'GSE_Tx%': 'GSE_Tx_pct'}, inplace=True)
-            
+            df_v8_chr_GeneID_Tx.rename(columns={'V8_Tx%': 'V8_Tx_pct', 'V9_Tx%': 'V9_Tx_pct', 'ONT_Tx%': 'ONT_Tx_pct', 'GSE_Tx%': 'GSE_Tx_pct'}, inplace=True)            
             dir_folder = './iCPG3.0_Cards_data_no_GSE_only'
             if not os.path.exists(dir_folder) : 
                 os.mkdir( dir_folder );
