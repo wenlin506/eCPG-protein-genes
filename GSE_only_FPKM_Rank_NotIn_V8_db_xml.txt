@@ -1,0 +1,74 @@
+# GSE_only_FPKM_Rank_NotIn_V8_db_xml
+import pandas as pd
+import numpy 
+import os
+from pathlib import Path
+
+df_iCPG_MANE = pd.read_csv('iCPGv2.0_19338_StdRef-Original_GSE.csv', sep=',', skiprows=0, index_col=None)
+df_ONT_only = pd.read_csv('ONT_only_FPKM_Rank_NotIn_V8_db_xml.csv', sep=',', skiprows=0, index_col=None)
+
+for chr in range(1, 23) :
+    chr = str(chr) + ''
+    df_iCPG_MANE_chr_gene = df_iCPG_MANE[df_iCPG_MANE['T2T_chr'].astype(str) == str(chr)]
+    df_iCPG_chr_GeneID_list = df_iCPG_MANE_chr_gene['Ensembl_ID'].to_list()
+    df_ONT_only = df_ONT_only[df_ONT_only['ONT_only_chromosome'].astype(str) == str(chr)]
+
+    for GeneID in df_iCPG_chr_GeneID_list :
+        df_ONT_only_GeneID = df_ONT_only[df_ONT_only['ONT_only_gene_id'] == str(GeneID)]
+        if len(df_ONT_only_GeneID) == 0 :
+            print('ONT_only_gene_id = ')
+            GeneName = df_iCPG_MANE_chr_gene[df_iCPG_MANE_chr_gene['Ensembl_ID'] == GeneID]['symbol']
+            print('GeneName = ' + GeneName)
+            df_ONT_only_GeneID_Tx = pd.DataFrame(columns=['ONT_only_chromosome', 'ONT_only_start', 'ONT_only_end', 
+                                                          'ONT_only_strand', 'ONT_only_gene_id', 'ONT_only_transcript_id', 
+                                                          'ONT_only_gene_name', 'ONT_only_transcript_type', 
+                                                          'ONT_only_v43_tx_len', 'ONT_only_v43_exon_count', 
+                                                          'ONT_only_v43_cds_len', 'ONT_only_FPKM', 'ONT_only_testis_1', 
+                                                          'ONT_only_testis_2', 'ONT_only_brain', 'ONT_only_Tx_FPKM', 
+                                                          'ONT_only_Gene_FPKM', 'ONT_only_Tx%', 'ONT_only_Tx_count', 
+                                                          'ONT_only_Rank', 'ONT_only_Ref_Tx', 'ONT_only_MANE_tx', 
+                                                        'ONT_only_MANE_match'])
+
+            df_ONT_only_GeneID_Tx.rename(columns={'ONT_only_Tx%': 'ONT_only_pct'}, inplace=True)
+
+            CPG_GeneID_info = df_ONT_only_GeneID_Tx
+            CPG_GeneID_info[df_ONT_only_GeneID_Tx.columns]=df_ONT_only_GeneID_Tx.values
+
+            dir_folder = './iCPG_Cards_ONT_only_data'
+            if not os.path.exists(dir_folder) : 
+                os.mkdir( dir_folder );
+
+            chr_folder = './iCPG_Cards_ONT_only_data/chr'+ str(chr)
+            if not os.path.exists(chr_folder) : 
+                os.mkdir( chr_folder );
+
+            f = open(chr_folder + '/iCPG_chr' + str(chr) + '_GeneID_'+ str(GeneID) + '_' + '.txt', "w")   # 'r' for reading and 'w' for writing
+            f.write("")  
+            f.close()  
+            
+        else :
+            df_ONT_only_GeneID_Tx = df_ONT_only_GeneID[['ONT_only_chromosome', 'ONT_only_start', 'ONT_only_end', 
+                                                          'ONT_only_strand', 'ONT_only_gene_id', 'ONT_only_transcript_id', 
+                                                          'ONT_only_gene_name', 'ONT_only_transcript_type', 
+                                                          'ONT_only_v43_tx_len', 'ONT_only_v43_exon_count', 
+                                                          'ONT_only_v43_cds_len', 'ONT_only_FPKM', 'ONT_only_testis_1', 
+                                                          'ONT_only_testis_2', 'ONT_only_brain', 'ONT_only_Tx_FPKM', 
+                                                          'ONT_only_Gene_FPKM', 'ONT_only_Tx%', 'ONT_only_Tx_count', 
+                                                          'ONT_only_Rank', 'ONT_only_Ref_Tx', 'ONT_only_MANE_tx', 
+                                                        'ONT_only_MANE_match']]
+
+            df_ONT_only_GeneID_Tx.rename(columns={'ONT_only_Tx%': 'ONT_only_pct'}, inplace=True)
+            GeneName = df_ONT_only_GeneID_Tx['ONT_only_gene_name'].values
+            CPG_GeneID_info = df_ONT_only_GeneID_Tx
+            CPG_GeneID_info[df_ONT_only_GeneID_Tx.columns]=df_ONT_only_GeneID_Tx.values
+
+            dir_folder = './iCPG_Cards_ONT_only_data'
+            if not os.path.exists(dir_folder) : 
+                os.mkdir( dir_folder );
+
+            chr_folder = './iCPG_Cards_ONT_only_data/chr'+ str(chr)
+            if not os.path.exists(chr_folder) : 
+                os.mkdir( chr_folder );
+
+            CPG_GeneID_info.to_xml(chr_folder + '/iCPG_chr' + str(chr) + '_GeneID_'+ str(GeneID) + '_' + GeneName[0] +'.xml')
+                                             
