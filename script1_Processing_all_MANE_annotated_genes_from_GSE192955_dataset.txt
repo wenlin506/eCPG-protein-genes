@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import os
+import itertools
 from pathlib import Path
 
 df_iCPG_MANE = pd.read_csv('data1.csv', sep=',', skiprows=0, index_col=None, low_memory=False)
@@ -33,8 +34,7 @@ rename_map = {
 dir_folder = './iCPG3.0_Cards_data_no_GSE_only_CDS_principal_check_PC%'
 os.makedirs(dir_folder, exist_ok=True)
 
-# Loop over Chromosomes 1 to 18
-for chr_num in range(1, 19):
+for chr_num in itertools.chain(range(1, 23), ('X', 'Y', 'Z')):
     print(f"Checking chr = {chr_num}...")
     
     df_iCPG_MANE_chr_gene = df_iCPG_MANE[
