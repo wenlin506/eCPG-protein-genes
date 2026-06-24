@@ -52,7 +52,6 @@ for chr in range(1, 19) :
             
             if len(CPG_GeneID_info) > 0 :
                 iCPG_file_GeneName = 'iCPG_chr' + str(chr) + '_GeneID_'+ str(GeneID) + '_' + GeneName +'.xml'
-                print('iCPG_file_GeneName = ' + iCPG_file_GeneName)
                 CPG_GeneID_info.to_xml(chr_folder + '/' + iCPG_file_GeneName)
             else :
                 f = open(chr_folder + '/iCPG_chr' + str(chr) + '_GeneID_'+ str(GeneID) + '_' + GeneName +'.xml', "w") 
