@@ -5,9 +5,9 @@ import numpy
 import os
 from pathlib import Path
 
-df_iCPG_MANE = pd.read_csv('data1.csv', sep=',', skiprows=0, index_col=None)
-df_v8_gene = pd.read_csv('data2.csv', sep=',', skiprows=0, index_col=None)
-df_GSE_only = pd.read_csv('data3.csv', sep=',', skiprows=0, index_col=None)
+df_iCPG_MANE = pd.read_csv('data1.csv', sep=',', skiprows=0, index_col=None, low_memory=False)
+df_v8_gene = pd.read_csv('data2.csv', sep=',', skiprows=0, index_col=None, low_memory=False)
+df_GSE_only = pd.read_csv('data3.csv', sep=',', skiprows=0, index_col=None, low_memory=False)
 
 for chr in range(1, 19) :
     df_iCPG_MANE_chr_gene = df_iCPG_MANE[df_iCPG_MANE['CPG_chr'] == chr]
