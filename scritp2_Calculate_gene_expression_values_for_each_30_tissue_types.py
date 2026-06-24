@@ -18,4 +18,4 @@ GSE_30Tissues_Tx['Tx%'] = df_GSE_gene['Tx%']
 GSE_30Tissues_Tx['Rank'] = df_GSE_gene['Rank']
 GSE_30Tissues_Tx['Ref_Tx'] = df_GSE_gene['Ref_Tx']
 
-GSE_30Tissues_Tx.to_csv('GSE_30Tissues_Tx_gene_sum_test.csv', index=False)
+GSE_30Tissues_Tx.to_csv('GSE_30Tissues_Tx_gene_sum.csv', index=False)
