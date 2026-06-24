@@ -3,7 +3,7 @@ import pandas as pd
 import numpy 
 import os
 
-df_GSE_gene = pd.read_csv('GSE192955_30ClontechTissue_1D_cDNA_N2_R0_abundance.esp_ProteinCoding_Ref_Tx.csv', sep=',', skiprows=0, index_col=None)
+df_GSE_gene = pd.read_csv('data4.csv', sep=',', skiprows=0, index_col=None)
 
 GSE_30Tissues = df_GSE_gene.iloc[:,9:39].columns.to_list()
 GSE_30Tissues_Tx = df_GSE_gene[['gene_ID', 'transcript_ID']]
