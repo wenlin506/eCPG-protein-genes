@@ -1,1 +1,16 @@
-Accumulating NGS expression datasets suggest that protein-coding genes produce numerous alternatively spliced transcripts. However, this observation might be overestimated in short-read sequencing data, which often cannot accurately resolve distinct spliced isoforms and introduce ambiguity. Resolving tissue-specific expression profiles is crucial to identify bona fide translated peptide products. In this study, we identified the most highly expressed protein-coding transcripts in respective protein-coding genes by using the long-read GSE192955 dataset to better assess the dominant transcript isoforms. Using this nanopore sequencing GSE192955 long-read dataset from 30 normal human tissues, we identified 18,094 dominantly expressed representative protein-coding transcripts (Ref-Tx) from 18,557 human genes. Comparison with MANE-select transcripts revealed that 14,546 Ref-Tx transcripts matched those in the MANE-select dataset. Despite tissue / sample variations and other confounding factors (sequencing depth and annotations), GSE192955 long-read dataset has more Rank1 Ref-Tx and agrees better with MANE. Similar patterns were observed when Ref-Tx were compared with functional APPRIS annotations. Given the importance of tissue-specific expression profiles for protein-coding transcripts, we developed an expression visualization bioinformatic tool (eCPG). This webtool integrates the extensive expression information from 30 normal human tissues as well as from the GTEx project, which is designed to interrogate the dominant protein-coding transcripts.
+Protein-coding genes in eukaryotic genome often produce alternatively spliced transcripts. This observation is intensified with accumulating short-read NGS sequencing data, however, there are issues in the accurate spliced isoforms expression profiles. Furthermore, identifying authentic translated peptide products requires tissue-specific transcript expression profiles. In the current study, we utilized the long-read GSE192955 dataset to identify the most abundantly expressed protein-coding transcripts isoforms. This dataset derived from 30 normal human tissues, discovered 18,094 highly expressed representative protein-coding transcripts (Ref-Tx) from a total of 18,557 human protein-coding genes. 14,546 Ref-Tx transcripts corresponded with annotated MANE-select transcripts. Comparing with the previous GTEx datsets, the GSE192955 long-read dataset exhibits more Rank1 Ref-Tx discovery and enhanced MANE-select transcript concordance. We also developed a bioinformatics tool for expression visualization on the protein-coding genes from 30 normal human tissues. There are few python scrips utilized for the expression data processing and gene annotation. 
+Script1: Processing all MANE annotated genes from GSE192955 dataset.
+Script2: Extracting GSE192955 unique transcripts (not observed in the GTEx V8 short-read dataset).
+Script3: Parsing GSE192955 expression dataset into 30 tissue types.
+
+Data files used for python scripts:
+data1:
+data2:
+data3:
+data4:
+data5:
+data6:
+data7:
+
+All scripts are provided with the source txt format and python format. Script1 used data1, data2 and data3 files. Script2 used data1 and data7 files. Script3 used data4 and data5 files. You can download and execute the python scripts and required datafiles in the same directory.
+
