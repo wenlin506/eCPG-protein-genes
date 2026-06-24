@@ -1,0 +1,22 @@
+# parsing 30 Tissue GSE from GSE192955_30ClontechTissue_1D_cDNA_N2_R0_abundance.esp_ProteinCoding_Ref_Tx
+import pandas as pd
+import numpy 
+import os
+
+df_GSE_gene = pd.read_csv('GSE192955_30ClontechTissue_1D_cDNA_N2_R0_abundance.esp_ProteinCoding_Ref_Tx.csv', sep=',', skiprows=0, index_col=None)
+
+GSE_30Tissues = df_GSE_gene.iloc[:,9:39].columns.to_list()
+GSE_30Tissues_Tx = df_GSE_gene[['gene_ID', 'transcript_ID']]
+GSE_30Tissues_Tx[GSE_30Tissues] = df_GSE_gene.iloc[:,9:39]
+
+for tissue in GSE_30Tissues:
+    GSE_30Tissues_Tx[tissue+'_gene'] = GSE_30Tissues_Tx.groupby('gene_ID')[tissue].transform('sum')
+    
+GSE_30Tissues_Tx['AVG_Tx'] = df_GSE_gene['AVG_Tx']
+GSE_30Tissues_Tx['AVG_gene'] = df_GSE_gene['AVG_gene']
+GSE_30Tissues_Tx['Tx%'] = df_GSE_gene['Tx%']
+GSE_30Tissues_Tx['Rank'] = df_GSE_gene['Rank']
+GSE_30Tissues_Tx['Ref_Tx'] = df_GSE_gene['Ref_Tx']
+GSE_30Tissues_Tx['V8_Tx_match'] = df_GSE_gene['V8_Tx_match']
+
+GSE_30Tissues_Tx.to_csv('GSE_30Tissues_Tx_gene_sum.csv')
